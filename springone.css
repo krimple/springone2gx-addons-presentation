@@ -128,6 +128,8 @@ h1 {
 	z-index: 2147483647;
 	font-size: 0.9em;
 	color: white;
+	margin-left: auto;
+    margin-right: auto;
 }
 
 #slideInfo {
