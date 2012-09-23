@@ -118,6 +118,18 @@ h1 {
 	width: 1280px;
 }
 
+#copyright {
+	height: 43px;
+	top: -43px;
+	margin: 0;
+	padding: 16px 0 0 60px;
+	position: relative;;
+	width: 1280px;
+	z-index: 2147483647;
+	font-size: 0.9em;
+	color: white;
+}
+
 #slideInfo {
 	color: white;
 	display: block;
