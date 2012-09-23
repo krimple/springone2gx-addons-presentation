@@ -20,7 +20,7 @@ dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot,
 	height: 720px;
 }
 
-/* Setup Fonts */
+/* Setup Fonts  */
 
 body {
 	font-family: "Arial", sans-serif;
@@ -28,6 +28,120 @@ body {
 }
 
 
+div.content {
+	font-size: 2.2em;
+}
+
 h1 {
+	font-size: 1.2em;
 	font-weight: bold;
+}
+
+ul > li {
+	font-size: 1.0em;
+}
+
+.content > ul > li > ul > li {
+	font-size: 0.95em;
+}
+
+.content > ul > li > ul > li  ul,
+.content > ul > li > ul > li  ul li {
+	font-size: 1em;
+}
+
+/* Positioning */
+
+div.content {
+	padding: 10px 50px;
+}
+
+div.content {
+	margin-top: 0px !important;
+}
+
+/* Bullets */
+
+.bullets > ul > li {
+	text-align: left;
+	list-style-type: disc;
+}
+
+.bullets > ul > li > ul > li,
+.bullets > ul > li > ul > li > ul > li > ul >li {
+	list-style-type: none;
+}
+
+.bullets > ul > li > ul > li:before,
+.bullets > ul > li > ul > li > ul > li > ul > li:before {
+	content:"- ";
+}
+
+.content ul li, .bullets ul li, .content ul, .content ul ul {
+	padding: 0;
+	margin: 0;
+}
+
+.content ul, .content ul ul {
+	list-style-position: inside;
+	padding-left: 40px;
+}
+
+.content ul li {
+	padding-top : 18px;
+}
+
+
+/* Misc */
+
+h1 {
+	text-align: left;
+	padding-bottom: 14px;
+	border-bottom: 4px solid #267b42;
+}
+
+.subsection h1 {
+	text-align: center;
+	padding: 0;
+	font-size: 3em;
+	margin: 250px 80px 0;
+	border-bottom: none;
+	background: inherit;
+	color: inherit;
+}
+
+#footer {
+	background: url("footer.png") no-repeat bottom;
+	height: 43px;
+	top: -43px;
+	padding: 0;
+	width: 1280px;
+}
+
+#slideInfo {
+	color: white;
+	display: block;
+	padding: 10px 0px 0px 40px;
+	font-size: 1.4em;
+}
+
+div.cover {
+	background: url("cover.png") no-repeat top;
+	height: 720px;
+}
+
+.cover > h1 {
+	border: none;
+	color: white;
+	font-weight: normal;
+	text-align: center;
+	padding-top: 310px;
+	font-size: 1.5em;
+}
+
+.cover > h2, .cover > p {
+	color: white;
+	font-size: 0.8em;
+	margin-top: 12px;
+	margin-bottom: 12px;
 }

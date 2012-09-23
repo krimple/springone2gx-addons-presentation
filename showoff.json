@@ -1,9 +1,9 @@
 {
-  "name": "Something",
+  "name": "Presentation name",
   "description": "Example Presentation",
-  "author": "Foo Bar John",
+  "author": "Your Name",
   "templates" : {
-      "special" : "simple.tpl"
+      "cover" : "cover.tpl"
   },
   "pause_msg": "Paused !!!",
   "sections": [

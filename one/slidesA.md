@@ -1,3 +1,38 @@
+<!SLIDE cover>
+
+<script>
+$(".cover").bind("showoff:show", function (event) {
+	$("#footer").hide();
+});
+$(".cover").bind("showoff:next", function (event) {
+	$("#footer").show();
+});
+</script>
+
+# Title #
+
+## Presenter, Title ##
+Email/Twitter (optional)
+
+
+
+<!SLIDE bullets>
+
+# Title and Content Slide (Arial Bold, 22pt) #
+
+* All body text is Arial
+* Subhead (20pt)
+  * Level Two (18pt)
+    * Level Three (16pt)
+      * Level Four (16pt)
+* Use the “Decrease/Increase Indent” tools to change bullet levels
+Click on the Home ribbon, Paragraph tab
+Line spacing is set in masters
+* Avoid using more than three bullet levels
+* Keep bullet points simple and concise
+
+
+
 <!SLIDE title-slide>
 .notes first slide
 
@@ -8,7 +43,7 @@
 
 # Second Slide #
 
-* something
+* All body text is Arial
 * something else
 * a third thing
 * a fourth thing
