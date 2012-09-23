@@ -1,5 +1,6 @@
 <!SLIDE cover>
 
+<!--
 <script>
 $("body,html").append('<div id="copyright" style="display:none;">&copy; 2012 SpringOne 2GX. All rights reserved. Do not distribute without permission.</div>')
 $(".cover").bind("showoff:show", function (event) {
@@ -11,6 +12,7 @@ $(".cover").bind("showoff:next", function (event) {
 	$("#copyright").hide();
 });
 </script>
+-->
 
 # Title #
 
