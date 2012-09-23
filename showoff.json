@@ -2,9 +2,6 @@
   "name": "Presentation name",
   "description": "Example Presentation",
   "author": "Your Name",
-  "templates" : {
-      "cover" : "cover.tpl"
-  },
   "pause_msg": "Paused !!!",
   "sections": [
     {"section":"one"},
