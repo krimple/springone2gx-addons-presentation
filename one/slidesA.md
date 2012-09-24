@@ -1,24 +1,9 @@
 <!SLIDE cover>
 
-<!--
-<script>
-$("body,html").append('<div id="copyright" style="display:none;">&copy; 2012 SpringOne 2GX. All rights reserved. Do not distribute without permission.</div>')
-$(".cover").bind("showoff:show", function (event) {
-	$("#footer").hide();
-	$("#copyright").show();
-});
-$(".cover").bind("showoff:next", function (event) {
-	$("#footer").show();
-	$("#copyright").hide();
-});
-</script>
--->
-
 # Title #
 
 ## Presenter, Title ##
 Email/Twitter (optional)
-
 
 
 <!SLIDE bullets>
