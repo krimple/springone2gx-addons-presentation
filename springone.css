@@ -68,13 +68,8 @@ div.content {
 }
 
 .bullets > ul > li > ul > li,
-.bullets > ul > li > ul > li > ul > li > ul >li {
-	list-style-type: none;
-}
-
-.bullets > ul > li > ul > li:before,
-.bullets > ul > li > ul > li > ul > li > ul > li:before {
-	content:"- ";
+.bullets > ul > li > ul > li > ul > li > ul > li {
+	list-style-image: url("dash.png");
 }
 
 .content ul li, .bullets ul li, .content ul, .content ul ul {
@@ -83,12 +78,11 @@ div.content {
 }
 
 .content ul, .content ul ul {
-	list-style-position: inside;
 	padding-left: 40px;
 }
 
 .content ul li {
-	padding-top : 18px;
+	padding : 18px 0 0 10px;
 }
 
 

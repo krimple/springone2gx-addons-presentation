@@ -12,9 +12,9 @@ Email/Twitter (optional)
 
 * All body text is Arial
 * Subhead (20pt)
-  * Level Two (18pt)
-    * Level Three (16pt)
-      * Level Four (16pt)
+	* Level Two (18pt)
+		* Level Three (16pt)
+			* Level Four (16pt)
 * Use the “Decrease/Increase Indent” tools to change bullet levels
 Click on the Home ribbon, Paragraph tab
 Line spacing is set in masters
