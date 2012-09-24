@@ -15,3 +15,8 @@ $(function() {
 		});
 	});
 });
+
+function toggleFooter() {
+	$("#footer").toggle();
+	$("#copyright").toggle();
+}
