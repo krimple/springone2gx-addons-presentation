@@ -161,3 +161,15 @@ div.cover {
 	top: -50px;
 	font-style: italic;
 }
+
+.footnote {
+    font-size: 0.6em;
+    display: block;
+    position: absolute;
+    top: 630px;
+    font-style: italic;
+}
+
+.content > P {
+	text-align: left;
+}
