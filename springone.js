@@ -1,7 +1,7 @@
 $(function() {
 	$("#preso").bind("showoff:loaded", function (event) {
 
-		$("body").append('<div id="copyright">&copy; 2012 SpringOne 2GX. All rights reserved. Do not distribute without permission.</div>')
+		$("body").append('<div id="copyright"><span>&copy; 2012 SpringOne 2GX. All rights reserved.</span></div>')
 		if($(".cover").is(':visible')) {
 			$("#footer").hide();
 		} else {
