@@ -1,8 +1,6 @@
-
-/* CSS Reset */
-
 body {
 	font-size: 100%;
+	background: white;
 }
 
 div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite,
@@ -13,20 +11,28 @@ dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot,
 	font-size: 1em;
 }
 
-/* Widescreen format */
-
-#preso,.slide {
-	width: 1280px;
-	height: 720px;
+#preso {
+	position:absolute; 
+	top:50%; 
+	height:720px;
+	margin-top:-360px;
+	box-shadow: none;
+	width: 100%;
 }
 
-/* Setup Fonts  */
+div.slide {
+	width: 1280px;
+	height: 720px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative !important;
+	box-shadow: none;
+}
 
 body {
 	font-family: "Arial", sans-serif;
 	color: #535353;
 }
-
 
 div.content {
 	font-size: 2.2em;
@@ -50,7 +56,9 @@ ul > li {
 	font-size: 1em;
 }
 
-/* Positioning */
+.content > p {
+	text-align: left;
+}
 
 div.content {
 	padding: 10px 50px;
@@ -59,8 +67,6 @@ div.content {
 div.content {
 	margin-top: 0px !important;
 }
-
-/* Bullets */
 
 .bullets > ul > li {
 	text-align: left;
@@ -85,9 +91,6 @@ div.content {
 	padding : 18px 0 0 10px;
 }
 
-
-/* Misc */
-
 h1 {
 	text-align: left;
 	padding-bottom: 14px;
@@ -105,25 +108,41 @@ h1 {
 }
 
 #footer {
-	background: url("footer.png") no-repeat bottom;
-	height: 43px;
-	top: -43px;
+    height: 720px;
+	margin: 0;
+    margin-top: -360px;
+    position: absolute;
+    top: 50%;
+	width: 100%;
 	padding: 0;
-	width: 1280px;
+	background: url("footer.png") no-repeat bottom;
 }
 
 #copyright {
-	height: 43px;
-	top: -43px;
+    height: 720px;
 	margin: 0;
-	padding: 16px 0 0 60px;
-	position: relative;;
-	width: 1280px;
+    margin-top: -360px;
+    position: absolute;
+    top: 50%;
+	width: 100%;
+	padding: 0;
 	z-index: 2147483647;
 	font-size: 0.9em;
-	color: white;
+}
+
+#footer > span, #copyright > span {
+	display: block;
+	position: relative;
+	top: 680px;
+	width: 1280px;
 	margin-left: auto;
-    margin-right: auto;
+	margin-right: auto;
+	color: white;
+}
+
+#copyright > span {
+	top: 693px;
+	left: 10px;
 }
 
 #slideInfo {
@@ -152,6 +171,7 @@ div.cover {
 	font-size: 0.8em;
 	margin-top: 12px;
 	margin-bottom: 12px;
+	text-align: center;
 }
 
 #notesInfo {
@@ -170,6 +190,4 @@ div.cover {
     font-style: italic;
 }
 
-.content > P {
-	text-align: left;
-}
+
