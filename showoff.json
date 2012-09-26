@@ -1,12 +1,14 @@
 {
-  "name": "Presentation name",
-  "description": "Example Presentation",
-  "author": "Your Name",
+  "name": "Leap ahead with Roo Add-ons",
+  "description": "Learn how to use Spring Roo add-ons to improve your productivity.",
+  "author": "Ken Rimple",
   "pause_msg": "Paused !!!",
-  "sections": [
-    {"section":"one"},
-    {"section":"two"},
-    {"section":"three"},
-    {"section":"four"}
-  ]
+  	"sections": [ 
+		{ "section":"title-page" },
+		{ "section":"about-roo" },
+		{ "section":"what-are-add-ons" },
+		{ "section":"why-addons" },
+		{ "section":"mechanics"}, 
+		{ "section":"simple-addons"}
+	]
 }
