@@ -4,7 +4,7 @@
   "author": "Ken Rimple",
   "pause_msg": "Paused !!!",
   	"sections": [ 
-		{ "section":"title-page" },
+		{ "section":"title" },
 		{ "section":"about-roo" },
 		{ "section":"what-are-add-ons" },
 		{ "section":"why-addons" },

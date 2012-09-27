@@ -36,3 +36,24 @@
 # Roo and OSGi bundles
 
 <img src="roo-bundles.jpg" height="500" style="border: 1px solid black;" />
+
+!SLIDE 
+
+# Exposing commands
+
+!SLIDE
+
+# Exposing command options - static values
+
+!SLIDE
+
+# Exposing command options - enums
+
+!SLIDE
+
+# Exposing command options dynamically
+
+* Create a class to expose
+* Create a Spring Roo converter for that class
+* Create the cli option exposing that class type
+
