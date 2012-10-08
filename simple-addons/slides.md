@@ -75,15 +75,18 @@
    
      $ roo
    
-     roo> osgi start --url (full path to jar in ./target)
-   
+     roo> osgi start --url (full path to jar in ./target)   
      roo> jquery setup
    
      jQuery installed.
 
+!SLIDE center
+
+# Refactor - delegate command to component
+
 !SLIDE
 
-# Delegate work to an _operations_ Component
+# Our `JqueryaddonOperations` interface
 
      @@@java
      package org.sillyweasel.jqueryaddon;
@@ -93,9 +96,10 @@
    
 * Interface driven components, just like Spring
 
-!SLIDE
+!SLIDE 
 
 # The implementation class
+.notes `@Component` and `@Service` expose this bean, `@Reference' injects another bean_
 
     @@@java
     package org.sillyweasel.addons.jquery;
@@ -103,28 +107,12 @@
     @Component
     @Service
     public class JqueryOperationsImpl
-       extends AbstractOperations 
-       implements JqueryOperations {
+       extends AbstractOperations implements JqueryOperations {
        @Reference private ProjectOperations projectOperations;
-
        public void setup() {
           ...
        }
     }
-!SLIDE
-
-# Stage the file
-
-    @@@bash
-
-    src/main/resources
-              └── org
-                  └── sillyweasel
-                     └── addons
-                          └── jquery
-                            └── jquery-1.8.1.min.js
-
-* Made available in JAR for copying into project
 
 !SLIDE
 
@@ -143,7 +131,31 @@
 
 !SLIDE
 
-# Calling the operations _component_
+# Stage the asset(s)
+
+    
+    src/main/resources *
+              └── org
+                  └── sillyweasel
+                     └── addons
+                          └── jquery
+                            └── jquery-1.8.1.min.js
+
+_* Made available in JAR for copying into project_
+
+!SLIDE bullets
+
+# OSGi's SCR API makes delegation easy
+
+* Expose components via `@Component` and `@Service`
+  * `@Component` provides lifecycle
+  * `@Service` provides component for injection
+* Inject delegate with `@Reference`
+* Sounds vaguely familiar...
+
+!SLIDE
+
+# Injection and calling `JqueryaddonOperations.setup()`
 
     @@@java
     // replace JqueryaddonCommands with:
@@ -151,22 +163,22 @@
     @Component
     @Service
     public class JqueryaddonCommands implements CommandMarker {
+      
        @Reference private JqueryaddonOperations addonOperations;
+       
        @CliCommand(value = "jquery setup", help = "Setup jQuery")
-       public void setup() {
+       public void setup() {         
           // call delegate
-          addonOperations.setup();
+          addonOperations.setup();          
        }
     }
-    
+
 !SLIDE bullets
 
-# OSGi's SCR API makes delegation easy
+# What else can you do with Roo Components/Services
 
-* Expose components via `@Component` and `@Service`
-* Inject delegate with `@Reference`
 * Inject services from other bundles...
   * More complex with non--core-Roo components
   * Must wrestle with dependencies and/or MANIFEST entries
   * Not covered here - we will inject standard Roo services
-
+    

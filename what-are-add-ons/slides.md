@@ -100,7 +100,8 @@
 
         public String Course.toString() {
             return ReflectionToStringBuilder
-               .toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+               .toString(this, 
+                         ToStringStyle.SHORT_PREFIX_STYLE);
         }
     }
 
