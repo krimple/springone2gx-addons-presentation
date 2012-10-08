@@ -6,6 +6,7 @@
 	},
 	"sections": [ 
 		{ "section":"title-page" },
+		{ "section":"about-me" },
 		{ "section":"about-roo" },
 		{ "section":"what-are-add-ons" },
 		{ "section":"why-addons" },
