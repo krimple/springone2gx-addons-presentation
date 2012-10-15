@@ -107,11 +107,15 @@
     @Component
     @Service
     public class JqueryOperationsImpl
-       extends AbstractOperations implements JqueryOperations {
+       extends AbstractOperations 
+       implements JqueryOperations {
+       
        @Reference private ProjectOperations projectOperations;
+       
        public void setup() {
           ...
        }
+       
     }
 
 !SLIDE
@@ -120,10 +124,14 @@
 
     @@@java
     public void setup() {
-       String pathIdentifier = pathResolver.getFocusedIdentifier(
-          Path.SRC_MAIN_WEBAPP, "js";
+      
+       String pathIdentifier = 
+          pathResolver.getFocusedIdentifier(
+            Path.SRC_MAIN_WEBAPP, "js");
+            
        copyDirectoryContents("jquery-1.8.1.min.js",
           pathIdentifier, true);
+          
     }
 
 * `copyDirectoryContents` is a method of `AbstractOperations`

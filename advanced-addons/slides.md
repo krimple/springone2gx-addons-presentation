@@ -61,15 +61,21 @@ _Actually mis-named, due to the complexity of the type and metadata APIs_
 # Fetching dependencies from XML files
 
     @@@java
-    String focusedModuleName = projectOperations.getFocusedModuleName();
+    String focusedModuleName = 
+       projectOperations.getFocusedModuleName();
 
     // this will fetch from configuration.xml in default package 
-    Element documentElement = XmlUtils.getConfiguration(getClass());
+    Element documentElement = 
+       XmlUtils.getConfiguration(getClass());
 
-    for (Element dependencyElement : XmlUtils.findElements(
-        "/configuration/project/dependencies/dependency", documentElement)) {
+    for (Element dependencyElement : 
+         XmlUtils.findElements(
+           "/configuration/project/dependencies/dependency", 
+           documentElement)) {
+          
       Dependency dependency = new Dependency(dependencyElement);
       projectOperations.addDependency(focusedModuleName, dependency); 
+      
     }
 
 !SLIDE
@@ -135,18 +141,18 @@ _Actually mis-named, due to the complexity of the type and metadata APIs_
 
 # In your meta-data class #
 
-		@@@java
-		protected AddonsMetadata(
-		  String identifier, JavaType aspectName, 
-		  PhysicalTypeMetadata governorPhysicalTypeMetadata) {
-		super(identifier, aspectName, governorPhysicalTypeMetadata);
-		
-		itdTypeDetails = builder.build();
-		if (isValid()) {
-		    ensureGovernorExtends(new JavaType("java.lang.Thread"));
-		    ensureGovernorImplements(new JavaType("java.io.Serializable"));
-		    buildItd();
-		}
+    @@@java
+    protected AddonsMetadata(
+      String identifier, JavaType aspectName, 
+      PhysicalTypeMetadata governorPhysicalTypeMetadata) {
+    super(identifier, aspectName, governorPhysicalTypeMetadata);
+
+    itdTypeDetails = builder.build();
+    if (isValid()) {
+        ensureGovernorExtends(new JavaType("java.lang.Thread"));
+        ensureGovernorImplements(new JavaType("java.io.Serializable"));
+        buildItd();
+    }
     
 
 !SLIDE
@@ -187,17 +193,18 @@ _Actually mis-named, due to the complexity of the type and metadata APIs_
 # Calling the metadata builder #
 
 		@@@java
-		protected AsyncActionMetadata(
-		    String identifier,
-		    JavaType aspectName,
-		    PhysicalTypeMetadata governorPhysicalTypeMetadata) {
+		protected AsyncActionMetadata(...) {
 		  super(identifier, aspectName, governorPhysicalTypeMetadata);
 
 		  itdTypeDetails = builder.build();
 		  if (isValid()) {
 
-		    ensureGovernorImplements(new JavaType("java.lang.Runnable"));
-		    JavaType physicalType = governorPhysicalTypeMetadata.getType();
+		    ensureGovernorImplements(
+		      new JavaType("java.lang.Runnable"));
+		      
+		    JavaType physicalType = 
+		      governorPhysicalTypeMetadata.getType();
+		      
 		    MethodMetadataBuilder threadRunMethodBuilder = 
 		    	createThreadRunnerMethod(physicalType);
 

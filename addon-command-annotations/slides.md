@@ -12,7 +12,7 @@
 
 !SLIDE
 
-# More complex example
+# Example - Command with Parameters #
 
     @@@java
     @CliCommand(value = "coffeescript addjoinset", help="...")
@@ -20,8 +20,8 @@
     public void addJoinSet(
       @CliOption(key = "joinSetId", mandatory = true, 
          specifiedDefaultValue = "main")
-
       String joinSetId,
+      
       @CliOption(key = "directory", mandatory = false, 
          unspecifiedDefaultValue = "/scripts",
           help = "directory to use as root of...")          
@@ -29,8 +29,10 @@
 
       ...) {
 
-    operations.addJoinSet(joinSetId, directory, includes, excludes);
-
+       operations.addJoinSet(joinSetId, directory, includes, excludes);
+       
+    }
+    
 !SLIDE
 
 # Picking sets of options
@@ -49,30 +51,30 @@
       @CliOption(key = "countryOfOrigin", 
                  mandatory = false, 
                  help = "Country of orgin") 
-      AddonsPropertyName country) {
+      Country country) {
         ...
     }
   
 !SLIDE 
 
-# The `AddonsPropertyName` Country enum
+# The `Country` enum
 
     @@@java
-    public enum AddonsPropertyName {
+    public enum Country {
       AUSTRALIA("Australia"),
       UNITED_STATES("United States"),
       GERMANY("Germany"),
       NOT_SPECIFIED("None of your business!");
       
-      private String propertyName;
+      private String countryText;
       
-      private AddonsPropertyName(String propertyName) {
+      private Country(String value) {
           Validate.notBlank(propertyName, "Property name required");
-          this.propertyName = propertyName;
+          this.value = value;
       }
       
       public String toString() {
-          return propertyName;
+          return value;
       }
     }
 
@@ -128,11 +130,31 @@
             return false;
         }
         else {
-            throw new IllegalArgumentException("Cannot convert " + value
-                    + " to type Boolean.");
+            throw new IllegalArgumentException(
+               "Cannot convert " + value
+               + " to type Boolean.");
         }
     }
 
+
+!SLIDE 
+# Command Option Context #
+.notes Show them
+  
+    @@@java
+    
+    // in @CliOption
+    @CliOption(... optionContext = "path-a")
+    
+    // in converter...
+    if (optionContext.equals("path-a")) {
+      ... do something
+    }
+    
+* You can set the context with the `optionContext` attribute of `@CliOption` 
+* The option context is passed to the converter method 
+* A way to distinguish the source of the converted data or options on how to treat the incoming data
+    
 
 !SLIDE
 
@@ -144,8 +166,8 @@
   * The `FileConverter` can do completions based on files in the directory
 * Other key converters
   * `Locale`, `Static Fields`, `Enum`
-
-* Available Commands via `AvailableCommandsConverter`
+* Available Commands 
+  * via `AvailableCommandsConverter`
 
 
 !SLIDE 
@@ -172,16 +194,18 @@
 
 !SLIDE 
 
-# Converting from text to an object of type `CloudUri`
+# Converting from text to an object of type `CloudUri` #
 
     @@@java
     public CloudUri convertFromText(
-            final String value,
-            final Class<?> requiredType, 
-            final String optionContext) {
+            final String value,            // from command line
+            final Class<?> requiredType,   // from supports
+            final String optionContext) {  // additional info from add-on
+              
       if (StringUtils.isBlank(value)) {
           return null;
       }
+      
       return new CloudUri(value);
     }
 
@@ -190,12 +214,14 @@
 # Providing fill-in features during command completion
 
     @@@java
-    public boolean getAllPossibleValues(final List<Completion> completions,
+    public boolean getAllPossibleValues(
+            final List<Completion> completions,
             final Class<?> requiredType, final String existingData,
             final String optionContext, final MethodTarget target) {
         
         final String appName = 
-           ConverterUtils.getOptionValue("appName", target.getRemainingBuffer());
+           ConverterUtils.getOptionValue("appName", 
+               target.getRemainingBuffer());
 
         final List<String> uris = session.getBoundUrlMap().get(appName);
 
@@ -207,11 +233,12 @@
         return false;
     }
 
-
+!SLIDE center
+# What about the Spring Shell Project?
 
 !SLIDE
 
-# So what about this Spring Shell?
+# Spring Shell
 
 * A Shell programming interface for your own, Spring-based apps
 * NOT OSGi based

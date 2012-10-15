@@ -44,16 +44,16 @@ h1 {
 }
 
 ul > li {
-	font-size: 1.0em;
+	font-size: 24pt;
 }
 
 .content > ul > li > ul > li {
-	font-size: 0.95em;
+	font-size: 24pt;
 }
 
 .content > ul > li > ul > li  ul,
 .content > ul > li > ul > li  ul li {
-	font-size: 1em;
+	font-size: 24pt;
 }
 
 .content > p {
