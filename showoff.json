@@ -15,5 +15,8 @@
 		{ "section":"addon-command-annotations"},
 		{ "section":"advanced-addons"},
 		{ "section":"conclusion"}
-	]
+	],
+	"pdf_options" : {
+		":footer_line" : "no" 
+	}
 }
