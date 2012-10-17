@@ -21,14 +21,10 @@
 
 # OSGi's dreaded `META-INF/MANIFEST.MF`
 
-<img src="manifest-created.jpg" height="500" style="border: 1px solid black;"/>
+<img src="manifest-created.jpg" class="diagram" />
 
 !SLIDE full-screen
 
 # Roo and OSGi bundles
 
-<img src="roo-bundles.jpg" height="500" style="border: 1px solid black;" />
-
-!SIDE center
-
-# Roo add-on project structure
+<img src="roo-bundles.jpg" class="diagram" />

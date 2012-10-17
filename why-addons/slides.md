@@ -8,20 +8,15 @@
 * Achieve a RAD platform with your own code patterns
 * Share with others – re-use of your own conventions
 
-!SLIDE bullets
-
-# Share Architectural Patterns
-
-* Your preferred ORM strategy
-* Your web platform configuration
-* Your set of standard libraries
-* An Ajax approach
-* Anything you can think of...
-
 !SLIDE bullets incremental
 
-# Share with the community
+# Tip: Build a Library of Recipe commands
 
-* Configuring your open source projects to work with Roo
-* Getting started with your application platform
-* Alternative to Maven archetypes
+* Your preferred ORM strategy / persistence mechanism
+* Your web framework configuration
+* Your set of standard libraries
+* An Ajax approach
+* Javascript, CSS, bootstrap libraries
+* Anything you can think of...
+* Share it with the outside world!
+

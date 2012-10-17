@@ -13,7 +13,12 @@
 * Create / modify Java code
 * Add/Remove/Manipulate ITDs
 
-!SLIDE
+!SLIDE center
 
 # Questions #
+
+* Twitter: @krimple
+* Blog: http://rimple.com
+* Emerging Tech site: http://emergingtech.chariotsolutions.com
+
 

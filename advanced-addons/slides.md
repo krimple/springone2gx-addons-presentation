@@ -2,25 +2,14 @@
 
 # Advanced add-ons
 
-!SLIDE build
-
-# A little secret...
-
-* Roo add-on types are just templates
-* You don't have a `simple` or `advanced` add-on
-* Simple add-ons focus on showing how to add commands and some type logic
-* Advanced add-ons expose maven building
-
-_Actually mis-named, due to the complexity of the type and metadata APIs_
-
-!SLIDE
-
-# Advanced add-ons
+!SLIDE 
+# Advanced add-on capabilities
 
 * Configure the Maven POM
-* Can create, remove ITDs
-* Can respond to file create, update, removal events
-* Can modify existing Java class files
+* Create, remove ITDs
+* Respond to file create, update, removal events
+* Modify existing Java class files
+* Copy files (transactionally)
 
 !SLIDE 
 
@@ -64,20 +53,19 @@ _Actually mis-named, due to the complexity of the type and metadata APIs_
     String focusedModuleName = 
        projectOperations.getFocusedModuleName();
 
-    // this will fetch from configuration.xml in default package 
-    Element documentElement = 
-       XmlUtils.getConfiguration(getClass());
+    Element doc = XmlUtils.getConfiguration(getClass());
 
     for (Element dependencyElement : 
          XmlUtils.findElements(
            "/configuration/project/dependencies/dependency", 
-           documentElement)) {
+           doc)) {
           
-      Dependency dependency = new Dependency(dependencyElement);
-      projectOperations.addDependency(focusedModuleName, dependency); 
-      
-    }
+      Dependency dependency = 
+        new Dependency(dependencyElement);
 
+      projectOperations.addDependency(
+        focusedModuleName, dependency); 
+    }
 !SLIDE
 
 # Sample Configuration File
@@ -89,7 +77,9 @@ _Actually mis-named, due to the complexity of the type and metadata APIs_
         <dependencies>
           <dependency>
             <groupId>org.springframework.batch</groupId>
-            <artifactId>spring-batch-admin-manager</artifactId>
+            <artifactId>
+               spring-batch-admin-manager
+            </artifactId>
              <version>1.0.0.RELEASE</version>
           </dependency>
         </dependencies>
@@ -145,15 +135,18 @@ _Actually mis-named, due to the complexity of the type and metadata APIs_
     protected AddonsMetadata(
       String identifier, JavaType aspectName, 
       PhysicalTypeMetadata governorPhysicalTypeMetadata) {
-    super(identifier, aspectName, governorPhysicalTypeMetadata);
+      
+      super(identifier, aspectName, 
+            governorPhysicalTypeMetadata);
 
     itdTypeDetails = builder.build();
     if (isValid()) {
-        ensureGovernorExtends(new JavaType("java.lang.Thread"));
-        ensureGovernorImplements(new JavaType("java.io.Serializable"));
+        ensureGovernorExtends(
+          new JavaType("java.lang.Thread"));
+        ensureGovernorImplements(
+          new JavaType("java.io.Serializable"));
         buildItd();
     }
-    
 
 !SLIDE
 
@@ -179,6 +172,13 @@ _Actually mis-named, due to the complexity of the type and metadata APIs_
 		  bodyBuilder.appendFormalLine(
 		    "System.out.println(\\"thread spawned!\\");");
 
+      ...
+!SLIDE
+
+# Example ITD Method Builder - returning the result #
+
+    @@@java
+      ...
 
 		  return new MethodMetadataBuilder(
 		      getId(),
@@ -188,30 +188,40 @@ _Actually mis-named, due to the complexity of the type and metadata APIs_
 		      bodyBuilder);
 		}
 
+* How do we call this?
+
 !SLIDE
 
-# Calling the metadata builder #
+# The ITD Metadata's constructor #
 
-		@@@java
-		protected AsyncActionMetadata(...) {
-		  super(identifier, aspectName, governorPhysicalTypeMetadata);
+    @@@java
+    protected AsyncActionMetadata(...) {
+      super(identifier, aspectName, 
+        governorPhysicalTypeMetadata);
 
-		  itdTypeDetails = builder.build();
-		  if (isValid()) {
+      itdTypeDetails = builder.build();
+      if (isValid()) {
+        ...
+      }
 
-		    ensureGovernorImplements(
-		      new JavaType("java.lang.Runnable"));
-		      
-		    JavaType physicalType = 
-		      governorPhysicalTypeMetadata.getType();
-		      
-		    MethodMetadataBuilder threadRunMethodBuilder = 
-		    	createThreadRunnerMethod(physicalType);
+!SLIDE
 
-		    builder.addMethod(threadSpawnerBuilder);
-		    buildItd();
-		  }
-		}
+# How to add the ITD
+
+    @@@java 
+    if (isValid()) {
+        ensureGovernorImplements(
+          new JavaType("java.lang.Runnable"));
+          
+        JavaType physicalType = 
+          governorPhysicalTypeMetadata.getType();
+          
+        MethodMetadataBuilder threadRunMethodBuilder = 
+        	createThreadRunnerMethod(physicalType);
+
+        builder.addMethod(threadSpawnerBuilder);
+        buildItd();
+      }		
 
 * Just add it as a builder 
 

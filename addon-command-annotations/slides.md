@@ -15,21 +15,18 @@
 # Example - Command with Parameters #
 
     @@@java
-    @CliCommand(value = "coffeescript addjoinset", help="...")
-
+    @CliCommand(value = "coffeescript addjoinset", ...) 
     public void addJoinSet(
-      @CliOption(key = "joinSetId", mandatory = true, 
-         specifiedDefaultValue = "main")
-      String joinSetId,
-      
-      @CliOption(key = "directory", mandatory = false, 
-         unspecifiedDefaultValue = "/scripts",
-          help = "directory to use as root of...")          
-      String directory,
 
+      // one for each option...
+      @CliOption(
+        key = "joinSetId", 
+        mandatory = true, 
+        specifiedDefaultValue = "main") String joinSetId,
+      
       ...) {
 
-       operations.addJoinSet(joinSetId, directory, includes, excludes);
+       operations.addJoinSet(joinSetId, ...);
        
     }
     
@@ -37,23 +34,17 @@
 
 # Picking sets of options
 
-    @@@java
-    
+    @@@java    
     @CliCommand(value = "say hello", 
        help = "Prints welcome message to the Roo shell")
-    public void sayHello(
-
+    public void sayHello(      
       @CliOption(key = "name", 
                  mandatory = true, 
-                 help = "State your name") 
-      String name, 
+                 help = "State your name") String name, 
 
       @CliOption(key = "countryOfOrigin", 
                  mandatory = false, 
-                 help = "Country of orgin") 
-      Country country) {
-        ...
-    }
+                 help = "country") Country country) {...}
   
 !SLIDE 
 
@@ -63,16 +54,15 @@
     public enum Country {
       AUSTRALIA("Australia"),
       UNITED_STATES("United States"),
-      GERMANY("Germany"),
-      NOT_SPECIFIED("None of your business!");
-      
+      GERMANY("Germany"), ...
+
       private String countryText;
-      
+
       private Country(String value) {
-          Validate.notBlank(propertyName, "Property name required");
+          Validate.notBlank(propertyName, 
+             "Property name required");
           this.value = value;
       }
-      
       public String toString() {
           return value;
       }
@@ -96,7 +86,7 @@
 
 !SLIDE
 
-# The `Converter` interface
+# The Roo Converter interface
 
     @@@java
     public interface Converter<T> {
@@ -106,7 +96,8 @@
       boolean getAllPossibleValues(
         List<Completion> completions,
         Class<?> targetType,
-        String existingData, String optionContext, 
+        String existingData, 
+        String optionContext, 
         MethodTarget target);
 
       boolean supports(Class<?> type, String optionContext);
@@ -119,22 +110,35 @@
 .notes Makes the input more flexible
 
     @@@java
-    public Boolean convertFromText(final String value,
-            final Class<?> requiredType, final String optionContext) {
-        if ("true".equalsIgnoreCase(value) || "1".equals(value)
-                || "yes".equalsIgnoreCase(value)) {
+    public Boolean convertFromText(
+      final String value,
+      final Class<?> requiredType, 
+      final String optionContext) {
+
+        if ("true".equalsIgnoreCase(value) 
+            || "1".equals(value)
+            || "yes".equalsIgnoreCase(value)) {
             return true;
         }
-        else if ("false".equalsIgnoreCase(value) || "0".equals(value)
-                || "no".equalsIgnoreCase(value)) {
+        else if ("false".equalsIgnoreCase(value) 
+             || "0".equals(value)
+             || "no".equalsIgnoreCase(value)) {
             return false;
         }
-        else {
-            throw new IllegalArgumentException(
-               "Cannot convert " + value
-               + " to type Boolean.");
+      ...
+!SLIDE
+
+# Dealing with type conversion issues
+
+    @@@java
+    ... else {
+          throw new IllegalArgumentException(
+             "Cannot convert " + value
+             + " to type Boolean.");
         }
-    }
+      }
+
+* Exception will appear as output in the shell
 
 
 !SLIDE 
@@ -142,7 +146,6 @@
 .notes Show them
   
     @@@java
-    
     // in @CliOption
     @CliOption(... optionContext = "path-a")
     
@@ -151,9 +154,9 @@
       ... do something
     }
     
-* You can set the context with the `optionContext` attribute of `@CliOption` 
-* The option context is passed to the converter method 
-* A way to distinguish the source of the converted data or options on how to treat the incoming data
+* set context with `optionContext` on `@CliOption` 
+* converter can distinguish between multiple commands
+* may need to convert differently based on the source
     
 
 !SLIDE
@@ -172,66 +175,45 @@
 
 !SLIDE 
 
-# Example - Cloud Foundry Add-on URI Converter
-.notes They extend `Converter` and mount as a Service Component for the given type
+# Example - PgpKeyIdConverter
+.notes Shows how a service can be accessed by the converter
 
     @@@java
     @Component
     @Service
-    public class CloudUriConverter implements Converter<CloudUri> {
+    public class PgpKeyIdConverter 
+      implements Converter<PgpKeyId> {
 
-        @Reference private CloudFoundrySession session;
+      @Reference 
+      private PgpService pgpService;
 
-        public CloudUri convertFromText(...);
-
-        public boolean getAllPossibleValues(...);
-
-        public boolean supports(final Class<?> requiredType,
-            final String optionContext) {
-              return CloudUri.class.isAssignableFrom(requiredType)
-        }
-    }
-
-!SLIDE 
-
-# Converting from text to an object of type `CloudUri` #
-
-    @@@java
-    public CloudUri convertFromText(
-            final String value,            // from command line
-            final Class<?> requiredType,   // from supports
-            final String optionContext) {  // additional info from add-on
-              
-      if (StringUtils.isBlank(value)) {
-          return null;
+      public PgpKeyId convertFromText(
+              final String value,
+              final Class<?> requiredType, 
+              final String optionContext) {
+          return new PgpKeyId(value.trim());
       }
-      
-      return new CloudUri(value);
-    }
+      ...
 
 !SLIDE
-.notes Return type tells shell whether further completions (digging deeper) are possible
-# Providing fill-in features during command completion
+
+# Example - PgpKeyIdConverter - code fill-in
 
     @@@java
-    public boolean getAllPossibleValues(
-            final List<Completion> completions,
-            final Class<?> requiredType, final String existingData,
-            final String optionContext, final MethodTarget target) {
+      public boolean getAllPossibleValues(...) {
         
-        final String appName = 
-           ConverterUtils.getOptionValue("appName", 
-               target.getRemainingBuffer());
-
-        final List<String> uris = session.getBoundUrlMap().get(appName);
-
-        if (uris != null) {
-            for (final String uri : uris) {
-                completions.add(new Completion(uri));
+        for (final PgpKeyId candidate : 
+                pgpService.getDiscoveredKeyIds()) {
+            final String id = candidate.getId();
+            if (id.toUpperCase().startsWith(
+              originalUserInput.toUpperCase())) {
+                completions.add(new Completion(id));
             }
         }
-        return false;
+        return false; // can we dig deeper next time?
     }
+
+* The pgpService is an OSGi Roo service from the add-on
 
 !SLIDE center
 # What about the Spring Shell Project?

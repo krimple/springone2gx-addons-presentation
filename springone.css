@@ -11,6 +11,34 @@ dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot,
 	font-size: 1em;
 }
 
+.tagcloud {
+  font-family: monospace;
+  font-size: 30pt;
+  font-variant: small-caps;
+  text-align: justify;
+}
+pre.sh_sourceCode {
+  background-color: #ffe;
+  width: 95%
+  height: 95%;
+  padding: 20px;
+  border: inset;  
+  border-style: groove;
+  font-style: bold;
+  font-weight: normal;
+  font-size: 24pt;
+}
+
+.diagram {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  margin-left: 100px;
+  border-style: inset;
+  border: 3px solid gray;
+  text-align: center;
+}
+
 #preso {
 	position:absolute; 
 	top:50%; 
@@ -227,6 +255,7 @@ div.cover {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
+
 
   thead {
     display: table-header-group;

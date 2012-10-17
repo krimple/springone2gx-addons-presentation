@@ -15,8 +15,9 @@
 		{ "section":"addon-command-annotations"},
 		{ "section":"advanced-addons"},
 		{ "section":"conclusion"}
-	],
+	]/* ,
 	"pdf_options" : {
-		":footer_line" : "no" 
-	}
+		"footer-center" : "Copyright Chariot Solutions, 2012"		
+	}*/
+	
 }

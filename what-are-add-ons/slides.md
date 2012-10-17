@@ -112,13 +112,13 @@
 
 # Injecting Commands
 
-<img src="inject-commands.jpg" width="850" style="border: 1px solid black;" />
+<img src="inject-commands.jpg" class="diagram" />
 
 !SLIDE
 
 # Roo Metadata Service
 
-<img src="roo-metadata.jpg" width="800" style="border: 1px solid black;" />
+<img src="roo-metadata.jpg" class="diagram"  />
 
 
 

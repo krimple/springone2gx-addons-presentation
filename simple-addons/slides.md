@@ -32,7 +32,7 @@
 
 # Files created by the _simple_ add-on
 
-<img src="addon-files.jpg" height="500" style="border: 1px solid black;" />
+<img src="addon-files.jpg" class="diagram" />
 
 !SLIDE center
 
@@ -52,14 +52,18 @@
     @@@java
     @Component
     @Service
-    public class JqueryaddonCommands implements CommandMarker {
+    public class JqueryaddonCommands
+      implements CommandMarker {
+
        private Logger log =
          Logger.getLogger(getClass().getName());
     
-       @CliCommand(value = "jquery setup", help = "Setup jQuery")
+       @CliCommand(value = "jquery setup", 
+                    help = "Setup jQuery")
        public void sayHello() {
-          log.severe("jQuery installed.");
+         log.severe("jQuery installed.");
        }
+
     }
 
 !SLIDE 
@@ -82,11 +86,11 @@
 
 !SLIDE center
 
-# Refactor - delegate command to component
+# Refactor - Delegate to another component
 
 !SLIDE
 
-# Our `JqueryaddonOperations` interface
+# Add an Operations interface
 
      @@@java
      package org.sillyweasel.jqueryaddon;
@@ -107,14 +111,13 @@
     @Component
     @Service
     public class JqueryOperationsImpl
-       extends AbstractOperations 
-       implements JqueryOperations {
+      extends AbstractOperations 
+      implements JqueryOperations {
        
-       @Reference private ProjectOperations projectOperations;
+      @Reference 
+      private ProjectOperations projectOperations;
        
-       public void setup() {
-          ...
-       }
+      public void setup() {...}
        
     }
 
@@ -137,11 +140,10 @@
 * `copyDirectoryContents` is a method of `AbstractOperations`
 * We manually changed our bean to extend this class
 
-!SLIDE
+!SLIDE 
 
 # Stage the asset(s)
 
-    
     src/main/resources *
               └── org
                   └── sillyweasel
@@ -149,7 +151,7 @@
                           └── jquery
                             └── jquery-1.8.1.min.js
 
-_* Made available in JAR for copying into project_
+_Made available in JAR for copying into project_
 
 !SLIDE bullets
 
@@ -165,16 +167,17 @@ _* Made available in JAR for copying into project_
 
 # Injection and calling `JqueryaddonOperations.setup()`
 
-    @@@java
-    // replace JqueryaddonCommands with:
-    
+    @@@java    
     @Component
     @Service
-    public class JqueryaddonCommands implements CommandMarker {
+    public class JqueryaddonCommands 
+       implements CommandMarker {
       
-       @Reference private JqueryaddonOperations addonOperations;
+       @Reference 
+       private JqueryaddonOperations addonOperations;
        
-       @CliCommand(value = "jquery setup", help = "Setup jQuery")
+       @CliCommand(value = "jquery setup", 
+                    help = "Setup jQuery")
        public void setup() {         
           // call delegate
           addonOperations.setup();          
@@ -189,4 +192,8 @@ _* Made available in JAR for copying into project_
   * More complex with non--core-Roo components
   * Must wrestle with dependencies and/or MANIFEST entries
   * Not covered here - we will inject standard Roo services
-    
+  
+!SLIDE center
+
+# Diversion - the Roo source code #
+(See http://github.com/springsource/spring-roo)  
