@@ -11,6 +11,34 @@ dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot,
 	font-size: 1em;
 }
 
+.tagcloud {
+  font-family: monospace;
+  font-size: 30pt;
+  font-variant: small-caps;
+  text-align: justify;
+}
+pre.sh_sourceCode {
+  background-color: #ffe;
+  width: 95%
+  height: 95%;
+  padding: 20px;
+  border: inset;  
+  border-style: groove;
+  font-style: bold;
+  font-weight: normal;
+  font-size: 24pt;
+}
+
+.diagram {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  margin-left: 100px;
+  border-style: inset;
+  border: 3px solid gray;
+  text-align: center;
+}
+
 #preso {
 	position:absolute; 
 	top:50%; 
@@ -44,16 +72,16 @@ h1 {
 }
 
 ul > li {
-	font-size: 1.0em;
+	font-size: 24pt;
 }
 
 .content > ul > li > ul > li {
-	font-size: 0.95em;
+	font-size: 24pt;
 }
 
 .content > ul > li > ul > li  ul,
 .content > ul > li > ul > li  ul li {
-	font-size: 1em;
+	font-size: 24pt;
 }
 
 .content > p {
@@ -189,5 +217,56 @@ div.cover {
     top: 630px;
     font-style: italic;
 }
+@media print {
+* {
+    background: transparent !important;
+    color: black !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+    -webkit-box-reflect: none !important;
+    -moz-box-reflect: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+  * :before, * :after {
+    display: none !important;
+  }
 
+  a, a:visited {
+    color: #444 !important;
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+    content: "";
+  }
+
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr, img {
+    page-break-inside: avoid;
+  }
+
+  @page {
+    margin: 0.5cm;
+  }
+}
 
