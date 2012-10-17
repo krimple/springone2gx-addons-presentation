@@ -13,3 +13,10 @@
   * We also develop in Spring, Java, mobile, integration technologies
 
 * More about me at my blog <a href="http://www.rimple.com/about-me">rimple.com/about-me</a>
+
+!SLIDE center
+
+# This presentation is on GitHub
+
+* Updated copy linked to at my blog, <a href="http://rimple.com/presentations">rimple.com/presentations</a>
+
